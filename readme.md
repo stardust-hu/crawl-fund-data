@@ -42,3 +42,7 @@ sort: 排序（里面数据暂时无用）
 "officeProvince": "上海市",
 "officeCity": "浦东新区",
 "primaryInvestType": "证券投资基金"
+
+
+# 基金产品查询
+URL: http://ba.amac.org.cn/pages/amacWeb/user!list.action
