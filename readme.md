@@ -46,3 +46,18 @@ sort: 排序（里面数据暂时无用）
 
 # 基金产品查询
 URL: http://ba.amac.org.cn/pages/amacWeb/user!list.action
+POST
+filter_LIKES_CPMC
+filter_LIKES_GLJG
+filter_LIKES_CPBM
+filter_GES_SLRQ
+filter_LES_SLRQ
+page.searchFileName=publicity_web
+page.sqlKey=PAGE_PUBLICITY_WEB
+page.sqlCKey=SIZE_PUBLICITY_WEB
+_search=false
+nd=1488121772129
+page.pageSize=200
+page.pageNo=1
+page.orderBy=SLRQ
+page.order=desc
