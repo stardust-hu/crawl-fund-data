@@ -26,7 +26,7 @@ header = {
 post_data = "{}"
 
 DEFAULT_SIZE = 500
-FILE_NAME = './output/page%d.csv'
+FILE_NAME = './output/organization/page%d.csv'
 
 
 def crawl_1page(page, size=DEFAULT_SIZE):
@@ -41,7 +41,6 @@ def crawl_1page(page, size=DEFAULT_SIZE):
 
 def extract_data(data):
     num = data['number']
-    print num
     df = pd.DataFrame(data['content'])
     df.to_csv(FILE_NAME % num, encoding='utf8', index=None)
 
@@ -55,6 +54,7 @@ def crawl():
         else:
             total_pages = data['totalPages']
             for page in range(0, total_pages):
+                print page, total_pages
                 data = crawl_1page(page)
                 extract_data(data)
                 is_last = data['last']
