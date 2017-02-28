@@ -2,12 +2,11 @@
 
 import requests
 import json
-import random
-import time
+import os
 import pandas as pd
 
 
-URL = 'http://gs.amac.org.cn/amac-infodisc/api/pof/fund?page=%d&size=%d'
+URL = 'http://gs.amac.org.cn/amac-infodisc/api/pof/fund?rand=%f&page=%d&size=%d'
 
 header = {
     'Host': 'gs.amac.org.cn',
@@ -26,11 +25,16 @@ header = {
 post_data = "{}"
 
 DEFAULT_SIZE = 1000
-FILE_NAME = './output/production/page%d.csv'
+RANDOM = pd.np.random.random()
+
+OUTPUT_PATH = './output/production'
+FILE_NAME = os.path.join(OUTPUT_PATH, 'page%d.csv')
+if not os.path.exists(OUTPUT_PATH):
+    os.makedirs(OUTPUT_PATH)
 
 
 def crawl_1page(page, size=DEFAULT_SIZE):
-    url = URL % (page, size)
+    url = URL % (RANDOM, page, size)
     response = requests.post(url=url, data=post_data, headers=header)
     if response.status_code == 200:
         data = json.loads(response.text)
@@ -54,7 +58,7 @@ def crawl():
         else:
             total_pages = data['totalPages']
             for page in range(0, total_pages):
-                print page, total_pages
+                print 'downloading...', page, total_pages
                 data = crawl_1page(page)
                 extract_data(data)
                 is_last = data['last']
@@ -66,10 +70,10 @@ def crawl():
 def merge_data(total_pages):
     data = pd.DataFrame()
     for page in range(0, total_pages):
-        print page
+        print 'read', page
         temp = pd.read_csv(FILE_NAME % page, encoding='utf8')
         data = pd.concat([data, temp], axis=0, join='outer', ignore_index=True)
-    data.to_csv('./production.csv', encoding='utf8', index=None)
+    data.to_csv('./output/production.csv', encoding='utf8', index=None)
 
 
 if __name__ == '__main__':
