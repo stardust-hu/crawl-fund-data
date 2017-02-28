@@ -11,4 +11,4 @@ POST
 URL = 'http://gs.amac.org.cn/amac-infodisc/api/pof/fund?rand=0.6124919103188785&page=0&size=100'
 ```
 ## 数据分析
-#### [私募基金管理人统计分析](https://nbviewer.jupyter.org/github/stardust-hu/some_test/blob/master/ana.ipynb)
+#### [私募基金管理人统计分析](https://nbviewer.jupyter.org/github/stardust-hu/crawl-fund-data/blob/master/ana.ipynb)
